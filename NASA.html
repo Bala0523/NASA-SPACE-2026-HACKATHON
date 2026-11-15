@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abandoned but Not Forgotten</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap");
+
+      :root {
+        --bg: #050914;
+        --cyan: #79e8f0;
+        --blue: #4e9cff;
+        --gold: #f1c982;
+        --white: #f4f7ff;
+        --muted: #a8b6ca;
+        --line: rgba(121, 232, 240, 0.22);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Space Grotesk", sans-serif;
+        color: var(--white);
+        background:
+          radial-gradient(
+            ellipse at 75% 10%,
+            rgba(37, 95, 145, 0.22),
+            transparent 34%
+          ),
+          linear-gradient(180deg, #050914 0%, #081326 55%, #040812 100%);
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0.32;
+        background-image:
+          radial-gradient(1px 1px at 12% 18%, #fff, transparent),
+          radial-gradient(1px 1px at 76% 28%, #c9faff, transparent),
+          radial-gradient(2px 2px at 43% 72%, #fff, transparent);
+        background-size: 260px 260px;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 19px 8%;
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: rgba(5, 9, 20, 0.85);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(18px);
+      }
+      .logo {
+        font-family: "Orbitron", sans-serif;
+        font-size: 21px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        color: var(--cyan);
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      nav a:hover {
+        color: var(--cyan);
+      }
+      .hero {
+        min-height: 650px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 100px 10%;
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        background:
+          linear-gradient(90deg, rgba(5, 9, 20, 0.96), rgba(5, 9, 20, 0.35)),
+          url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1600")
+            center/cover;
+        border-bottom: 1px solid var(--line);
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 1px solid rgba(121, 232, 240, 0.3);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 35px rgba(121, 232, 240, 0.025),
+          0 0 0 90px rgba(121, 232, 240, 0.018);
+      }
+      .hero h1 {
+        position: relative;
+        z-index: 1;
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(38px, 5.8vw, 68px);
+        line-height: 1.15;
+        max-width: 760px;
+        margin-bottom: 24px;
+        text-transform: uppercase;
+      }
+      .hero h1 span {
+        color: var(--gold);
+      }
+      .hero p {
+        position: relative;
+        z-index: 1;
+        color: #d0dced;
+        font-size: 19px;
+        max-width: 600px;
+        line-height: 1.75;
+      }
+      .btn {
+        display: inline-block;
+        width: fit-content;
+        margin-top: 25px;
+        padding: 14px 24px;
+        background: var(--cyan);
+        color: #06101d;
+        text-decoration: none;
+        font-family: "Orbitron", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        border: 0;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .btn:hover {
+        transform: translateY(-3px);
+      }
+      section {
+        padding: 80px 8%;
+        position: relative;
+      }
+      .section-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(26px, 3.5vw, 37px);
+        margin-bottom: 15px;
+        color: var(--cyan);
+      }
+      .subtitle {
+        color: var(--muted);
+        margin-bottom: 30px;
+        font-size: 18px;
+      }
+      #explore {
+        background: rgba(7, 15, 29, 0.85);
+      }
+      #explore::before {
+        content: "MISSION DATABASE / ARCHIVE ACCESS";
+        display: block;
+        font-family: "Orbitron", sans-serif;
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: var(--gold);
+        margin-bottom: 17px;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-bottom: 30px;
+      }
+      .stat {
+        padding: 20px;
+        background: rgba(13, 24, 42, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+      }
+      .stat strong {
+        display: block;
+        color: var(--gold);
+        font:
+          700 26px "Orbitron",
+          sans-serif;
+      }
+      .stat span {
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .search {
+        padding: 14px 16px;
+        width: 100%;
+        max-width: 420px;
+        border: 1px solid rgba(121, 232, 240, 0.42);
+        background: #091323;
+        color: var(--white);
+        border-radius: 4px;
+        margin-bottom: 20px;
+        font:
+          16px "Space Grotesk",
+          sans-serif;
+        outline: none;
+      }
+      .search:focus {
+        border-color: var(--cyan);
+      }
+      .filters {
+        margin-bottom: 20px;
+      }
+      .filters button,
+      .feature-toolbar button,
+      .feature-toolbar select {
+        padding: 10px 16px;
+        margin: 5px;
+        background: #0e1c31;
+        color: var(--muted);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        cursor: pointer;
+        font:
+          12px "Space Grotesk",
+          sans-serif;
+      }
+      .filters button.active,
+      .filters button:hover,
+      .feature-toolbar button:hover,
+      .feature-toolbar button.active {
+        background: var(--cyan);
+        color: #06101d;
+      }
+      .feature-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin: 5px 0 18px;
+      }
+      .feature-toolbar select {
+        margin: 0;
+      }
+      #resultCount {
+        color: var(--gold);
+        font-size: 13px;
+        margin-bottom: 18px;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+      .card {
+        background: linear-gradient(
+          145deg,
+          rgba(17, 34, 57, 0.96),
+          rgba(8, 17, 32, 0.98)
+        );
+        border-radius: 7px;
+        overflow: hidden;
+        border: 1px solid rgba(121, 232, 240, 0.16);
+        transition: 0.3s;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      }
+      .card:hover {
+        transform: translateY(-6px);
+        border-color: var(--cyan);
+        box-shadow: 0 18px 38px rgba(0, 0, 0, 0.34);
+      }
+      .card img {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+        border-bottom: 1px solid var(--line);
+      }
+      .card-content {
+        padding: 21px;
+      }
+      .card h3 {
+        margin-bottom: 10px;
+        color: var(--gold);
+        font:
+          16px "Orbitron",
+          sans-serif;
+        line-height: 1.5;
+      }
+      .card p {
+        color: var(--muted);
+        line-height: 1.65;
+        margin-bottom: 15px;
+      }
+      .card-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .card button {
+        padding: 10px 13px;
+        background: transparent;
+        color: var(--cyan);
+        border: 1px solid rgba(121, 232, 240, 0.65);
+        border-radius: 3px;
+        cursor: pointer;
+        font:
+          12px "Space Grotesk",
+          sans-serif;
+      }
+      .card button:hover {
+        background: var(--cyan);
+        color: #06101d;
+      }
+      .card .save-btn {
+        color: var(--gold);
+        border-color: rgba(241, 201, 130, 0.55);
+      }
+      .card .save-btn.saved {
+        background: rgba(241, 201, 130, 0.16);
+      }
+      #empty {
+        display: none;
+        color: var(--muted);
+      }
+      #timeline {
+        background: linear-gradient(120deg, #0c192d, #060d1b);
+        border-top: 1px solid var(--line);
+      }
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        margin-top: 25px;
+      }
+      .timeline-item {
+        padding: 18px;
+        border-left: 2px solid var(--cyan);
+        background: rgba(13, 24, 42, 0.72);
+        border-radius: 3px;
+      }
+      .timeline-item strong {
+        display: block;
+        color: var(--gold);
+        font:
+          600 18px "Orbitron",
+          sans-serif;
+      }
+      .timeline-item span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .quiz-box {
+        margin-top: 30px;
+        padding: 25px;
+        max-width: 760px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: linear-gradient(
+          145deg,
+          rgba(17, 34, 57, 0.9),
+          rgba(8, 17, 32, 0.95)
+        );
+      }
+      .quiz-box h3 {
+        color: var(--gold);
+        font-family: "Orbitron", sans-serif;
+        margin-bottom: 12px;
+      }
+      .quiz-box p {
+        color: #d0dced;
+        line-height: 1.6;
+        margin-bottom: 14px;
+      }
+      .quiz-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .quiz-options button {
+        cursor: pointer;
+        padding: 10px 14px;
+        color: var(--cyan);
+        background: #0a1729;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+      }
+      .quiz-options button:hover {
+        background: var(--cyan);
+        color: #06101d;
+      }
+      #quizFeedback {
+        min-height: 24px;
+        margin-top: 14px;
+        color: var(--gold);
+      }
+      .about {
+        background:
+          radial-gradient(
+            ellipse at 85% 50%,
+            rgba(49, 91, 145, 0.18),
+            transparent 42%
+          ),
+          linear-gradient(120deg, #0c192d, #060d1b);
+        border-top: 1px solid var(--line);
+      }
+      .about p {
+        max-width: 850px;
+        line-height: 1.9;
+        color: #c1cede;
+        font-size: 18px;
+      }
+      footer {
+        padding: 32px;
+        text-align: center;
+        background: #030711;
+        color: #899bb2;
+        border-top: 1px solid var(--line);
+      }
+      footer h3 {
+        color: var(--cyan);
+        font-family: "Orbitron", sans-serif;
+        font-size: 14px;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(2, 6, 15, 0.86);
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        z-index: 100;
+        backdrop-filter: blur(10px);
+      }
+      .modal-content {
+        background: linear-gradient(145deg, #142741, #091426);
+        padding: 32px;
+        border: 1px solid rgba(121, 232, 240, 0.55);
+        border-top: 3px solid var(--gold);
+        border-radius: 8px;
+        max-width: 550px;
+        width: 100%;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+      .modal-content h2 {
+        color: var(--gold);
+        font:
+          22px "Orbitron",
+          sans-serif;
+        margin-bottom: 15px;
+      }
+      .modal-content h3 {
+        color: var(--cyan);
+        font:
+          13px "Orbitron",
+          sans-serif;
+        margin: 20px 0 8px;
+      }
+      .modal-content p {
+        color: #c1cede;
+        line-height: 1.7;
+        margin-bottom: 15px;
+      }
+      .modal-meta {
+        color: var(--gold) !important;
+        font-size: 13px;
+      }
+      .close {
+        float: right;
+        font-size: 27px;
+        background: none;
+        border: none;
+        color: var(--cyan);
+        cursor: pointer;
+      }
+      @media (max-width: 850px) {
+        .cards {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .hero h1 {
+          font-size: 45px;
+        }
+      }
+      @media (max-width: 550px) {
+        .cards,
+        .stats {
+          grid-template-columns: 1fr;
+        }
+        nav {
+          flex-wrap: wrap;
+        }
+        nav a {
+          margin-left: 7px;
+          font-size: 10px;
+        }
+        .hero {
+          min-height: 570px;
+          padding: 90px 7%;
+        }
+        .hero h1 {
+          font-size: 35px;
+        }
+        .hero p {
+          font-size: 17px;
+        }
+        section {
+          padding: 60px 7%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div>
+        <a href="#home">Home</a>
+        <a href="#explore">Explore</a>
+        <a href="#timeline">Timeline & Quiz</a>
+        <a href="#about">About</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="home">
+      <h1>Abandoned but <span>Not Forgotten.</span></h1>
+      <p>
+        Discover the forgotten machines of space exploration. Explore abandoned
+        rovers, landers and spacecraft left behind on the Moon and Mars. Every
+        object has a story worth remembering.
+      </p>
+      <a href="#explore" class="btn">Explore the Space Archive →</a>
+    </header>
+
+    <section id="explore">
+      <h2 class="section-title">Explore Space Objects</h2>
+      <p class="subtitle">
+        Discover the history behind forgotten space missions.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong id="totalCount">7</strong><span>Archived objects</span>
+        </div>
+        <div class="stat"><strong>2</strong><span>Worlds explored</span></div>
+        <div class="stat">
+          <strong>1969–2018</strong><span>Mission years</span>
+        </div>
+      </div>
+
+      <input
+        type="text"
+        class="search"
+        id="search"
+        placeholder="Search missions, planets, years..."
+      />
+
+      <div class="filters">
+        <button class="active" onclick="filterObjects('All', this)">All</button>
+        <button onclick="filterObjects('Moon', this)">Moon</button>
+        <button onclick="filterObjects('Mars', this)">Mars</button>
+        <button onclick="filterObjects('Rover', this)">Rovers</button>
+        <button onclick="filterObjects('Lander', this)">Landers</button>
+      </div>
+
+      <div class="feature-toolbar">
+        <select id="sortSelect" aria-label="Sort missions">
+          <option value="newest">Sort: Newest first</option>
+          <option value="oldest">Sort: Oldest first</option>
+          <option value="name">Sort: Name A–Z</option>
+        </select>
+        <button id="favoritesToggle" type="button">
+          ☆ Show saved missions
+        </button>
+        <button id="randomMission" type="button">
+          ✦ Discover a random mission
+        </button>
+      </div>
+      <p id="resultCount" aria-live="polite"></p>
+
+      <div class="cards" id="cards"></div>
+      <p id="empty">No matching objects found.</p>
+    </section>
+
+    <section id="timeline">
+      <h2 class="section-title">Mission Timeline</h2>
+      <p class="subtitle">A quick journey through decades of exploration.</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <strong>1969</strong><span>Apollo 11 Moon landing</span>
+        </div>
+        <div class="timeline-item">
+          <strong>1970</strong><span>Lunokhod 1 begins lunar exploration</span>
+        </div>
+        <div class="timeline-item">
+          <strong>1976</strong><span>Viking 1 lands on Mars</span>
+        </div>
+        <div class="timeline-item">
+          <strong>2004</strong
+          ><span>Spirit and Opportunity arrive at Mars</span>
+        </div>
+        <div class="timeline-item">
+          <strong>2008</strong><span>Phoenix investigates Martian ice</span>
+        </div>
+        <div class="timeline-item">
+          <strong>2018</strong><span>InSight studies Mars' interior</span>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <h3>Mission Control: Quick Quiz</h3>
+        <p id="quizQuestion"></p>
+        <div class="quiz-options" id="quizOptions"></div>
+        <p id="quizFeedback" aria-live="polite"></p>
+        <button id="nextQuiz" class="btn" type="button">Next question →</button>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <h2 class="section-title">About Our Project</h2>
+      <p>
+        Abandoned but Not Forgotten is an interactive digital storytelling
+        platform that explores the history of abandoned space equipment on the
+        Moon and Mars. Our project helps students understand the purpose,
+        history and importance of space missions. Using HTML, CSS, JavaScript
+        and 3D visualization technologies, we transform forgotten space objects
+        into interesting educational stories. Our mission is to remind everyone
+        that even when a spacecraft stops working, its contribution to science
+        is never forgotten.
+      </p>
+    </section>
+
+    <footer>
+      <h3>ABNF. - Abandoned but Not Forgotten</h3>
+      <p>Exploring the past. Remembering the future.</p>
+    </footer>
+
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal()">×</button>
+        <h2 id="modalTitle"></h2>
+        <p class="modal-meta" id="modalMeta"></p>
+        <p id="modalDescription"></p>
+        <h3>Mission Purpose</h3>
+        <p id="modalPurpose"></p>
+        <h3>Why Was It Left Behind?</h3>
+        <p id="modalReason"></p>
+        <h3>Historical Importance</h3>
+        <p id="modalHistory"></p>
+      </div>
+    </div>
+
+    <script>
+      const objects = [
+        {
+          name: "Lunokhod 1",
+          place: "Moon",
+          type: "Rover",
+          year: "1970",
+          image:
+            "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=700",
+          description:
+            "Lunokhod 1 was the first successful remote-controlled rover to operate on another celestial body.",
+          purpose:
+            "It explored the lunar surface, collected scientific information and photographed its surroundings.",
+          reason: "It completed its mission and remained on the Moon.",
+          history:
+            "It demonstrated that robotic vehicles could explore the surface of another world.",
+        },
+        {
+          name: "Apollo 11 Lunar Module",
+          place: "Moon",
+          type: "Lander",
+          year: "1969",
+          image:
+            "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=700",
+          description:
+            "The Apollo 11 Lunar Module, called Eagle, carried the first astronauts to the Moon.",
+          purpose:
+            "It transported Neil Armstrong and Buzz Aldrin to the lunar surface.",
+          reason:
+            "Its descent stage was left on the Moon when the astronauts returned to lunar orbit.",
+          history: "It was part of the first successful human Moon landing.",
+        },
+        {
+          name: "Viking 1 Lander",
+          place: "Mars",
+          type: "Lander",
+          year: "1976",
+          image:
+            "https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=700",
+          description:
+            "Viking 1 was one of the first successful spacecraft to land on Mars.",
+          purpose:
+            "It studied Martian soil, photographed the surface and monitored weather.",
+          reason:
+            "It remained at its landing site after communication with Earth ended.",
+          history: "It greatly improved scientific understanding of Mars.",
+        },
+        {
+          name: "Spirit Rover",
+          place: "Mars",
+          type: "Rover",
+          year: "2004",
+          image:
+            "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=700",
+          description:
+            "Spirit was a NASA Mars rover that explored Gusev Crater.",
+          purpose:
+            "It studied rocks and soil to search for evidence of ancient water.",
+          reason:
+            "It became stuck and eventually stopped communicating with Earth.",
+          history:
+            "Its discoveries provided evidence of past water activity on Mars.",
+        },
+        {
+          name: "Opportunity Rover",
+          place: "Mars",
+          type: "Rover",
+          year: "2004",
+          image:
+            "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=700",
+          description:
+            "Opportunity was a NASA rover designed to explore the Martian surface.",
+          purpose:
+            "It investigated rocks and soil to understand the history of water on Mars.",
+          reason:
+            "A major dust storm prevented its solar panels from producing enough power.",
+          history:
+            "It worked for nearly 15 years, far beyond its original planned mission.",
+        },
+        {
+          name: "Phoenix Mars Lander",
+          place: "Mars",
+          type: "Lander",
+          year: "2008",
+          image:
+            "https://images.unsplash.com/photo-1614732484003-ef9881555dc3?w=700",
+          description:
+            "Phoenix was a NASA lander sent to investigate the northern region of Mars.",
+          purpose: "It studied the soil and searched for water ice.",
+          reason:
+            "It was designed for a short mission and could not survive the harsh Martian winter.",
+          history:
+            "It confirmed the presence of water ice near the Martian surface.",
+        },
+        {
+          name: "InSight Lander",
+          place: "Mars",
+          type: "Lander",
+          year: "2018",
+          image:
+            "https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=700",
+          description:
+            "InSight was a NASA mission that studied the deep interior of Mars.",
+          purpose:
+            "It measured marsquakes and investigated the planet's internal structure.",
+          reason:
+            "Dust accumulated on its solar panels, reducing available power.",
+          history:
+            "It provided important information about the internal structure of Mars.",
+        },
+      ];
+
+      const cards = document.getElementById("cards");
+      const searchInput = document.getElementById("search");
+      const resultCount = document.getElementById("resultCount");
+
+      let activeCategory = "All";
+      let showSavedOnly = false;
+      let sortMode = "newest";
+      let savedMissions = [];
+
+      try {
+        savedMissions = JSON.parse(
+          localStorage.getItem("abnfSavedMissions") || "[]",
+        );
+      } catch (error) {
+        savedMissions = [];
+      }
+
+      function saveMissions() {
+        try {
+          localStorage.setItem(
+            "abnfSavedMissions",
+            JSON.stringify(savedMissions),
+          );
+        } catch (error) {
+          console.log("Browser storage is unavailable.");
+        }
+      }
+
+      function getVisibleObjects() {
+        const query = searchInput.value.trim().toLowerCase();
+
+        let list = objects.filter((object) => {
+          const matchesCategory =
+            activeCategory === "All" ||
+            object.place === activeCategory ||
+            object.type === activeCategory;
+
+          const searchable = [
+            object.name,
+            object.place,
+            object.type,
+            object.year,
+            object.description,
+            object.purpose,
+          ]
+            .join(" ")
+            .toLowerCase();
+
+          const matchesSearch = !query || searchable.includes(query);
+          const matchesSaved =
+            !showSavedOnly || savedMissions.includes(object.name);
+
+          return matchesCategory && matchesSearch && matchesSaved;
+        });
+
+        if (sortMode === "newest") {
+          list.sort((a, b) => Number(b.year) - Number(a.year));
+        } else if (sortMode === "oldest") {
+          list.sort((a, b) => Number(a.year) - Number(b.year));
+        } else {
+          list.sort((a, b) => a.name.localeCompare(b.name));
+        }
+
+        return list;
+      }
+
+      function displayObjects(list = getVisibleObjects()) {
+        cards.innerHTML = "";
+        document.getElementById("empty").style.display = list.length
+          ? "none"
+          : "block";
+        resultCount.textContent = `Showing ${list.length} of ${objects.length} missions`;
+
+        list.forEach((object) => {
+          const isSaved = savedMissions.includes(object.name);
+          const card = document.createElement("article");
+          card.className = "card";
+
+          const image = document.createElement("img");
+          image.src = object.image;
+          image.alt = object.name;
+          image.loading = "lazy";
+
+          const content = document.createElement("div");
+          content.className = "card-content";
+
+          const title = document.createElement("h3");
+          title.textContent = object.name;
+
+          const meta = document.createElement("p");
+          meta.textContent = `${object.place} | ${object.type} | ${object.year}`;
+
+          const description = document.createElement("p");
+          description.textContent = object.description;
+
+          const actions = document.createElement("div");
+          actions.className = "card-actions";
+
+          const detailsButton = document.createElement("button");
+          detailsButton.textContent = "Explore Story";
+          detailsButton.addEventListener("click", () =>
+            showDetails(object.name),
+          );
+
+          const saveButton = document.createElement("button");
+          saveButton.className = `save-btn${isSaved ? " saved" : ""}`;
+          saveButton.textContent = isSaved ? "★ Saved" : "☆ Save";
+          saveButton.addEventListener("click", () => toggleSaved(object.name));
+
+          actions.append(detailsButton, saveButton);
+          content.append(title, meta, description, actions);
+          card.append(image, content);
+          cards.appendChild(card);
+        });
+      }
+
+      function toggleSaved(name) {
+        if (savedMissions.includes(name)) {
+          savedMissions = savedMissions.filter((item) => item !== name);
+        } else {
+          savedMissions.push(name);
+        }
+
+        saveMissions();
+        updateSavedButton();
+        displayObjects();
+      }
+
+      function updateSavedButton() {
+        const button = document.getElementById("favoritesToggle");
+        button.classList.toggle("active", showSavedOnly);
+        button.textContent = showSavedOnly
+          ? "★ Show all missions"
+          : "☆ Show saved missions";
+      }
+
+      searchInput.addEventListener("input", displayObjects);
+
+      function filterObjects(category, button) {
+        activeCategory = category;
+        document
+          .querySelectorAll(".filters button")
+          .forEach((btn) => btn.classList.remove("active"));
+
+        button.classList.add("active");
+        displayObjects();
+      }
+
+      document
+        .getElementById("sortSelect")
+        .addEventListener("change", (event) => {
+          sortMode = event.target.value;
+          displayObjects();
+        });
+
+      document
+        .getElementById("favoritesToggle")
+        .addEventListener("click", () => {
+          showSavedOnly = !showSavedOnly;
+          updateSavedButton();
+          displayObjects();
+        });
+
+      document.getElementById("randomMission").addEventListener("click", () => {
+        const pool = getVisibleObjects();
+
+        if (!pool.length) {
+          alert("No missions match your current search or filters.");
+          return;
+        }
+
+        const chosen = pool[Math.floor(Math.random() * pool.length)];
+        showDetails(chosen.name);
+      });
+
+      function showDetails(name) {
+        const object = objects.find((item) => item.name === name);
+        if (!object) return;
+
+        document.getElementById("modalTitle").textContent = object.name;
+        document.getElementById("modalMeta").textContent =
+          `${object.place} • ${object.type} • Mission year: ${object.year}`;
+        document.getElementById("modalDescription").textContent =
+          object.description;
+        document.getElementById("modalPurpose").textContent = object.purpose;
+        document.getElementById("modalReason").textContent = object.reason;
+        document.getElementById("modalHistory").textContent = object.history;
+
+        document.getElementById("modal").style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("modal").style.display = "none";
+      }
+
+      document
+        .getElementById("modal")
+        .addEventListener("click", function (event) {
+          if (event.target === this) closeModal();
+        });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeModal();
+      });
+
+      // Interactive quiz
+      const quizQuestions = [
+        {
+          question: "Which rover explored Mars for nearly 15 years?",
+          options: ["Spirit", "Opportunity", "Lunokhod 1"],
+          answer: "Opportunity",
+          fact: "Opportunity operated on Mars for almost 15 years.",
+        },
+        {
+          question:
+            "Which mission was the first successful human Moon landing?",
+          options: ["Apollo 11", "Viking 1", "InSight"],
+          answer: "Apollo 11",
+          fact: "Apollo 11 landed astronauts on the Moon in July 1969.",
+        },
+        {
+          question:
+            "Which lander confirmed water ice near the Martian surface?",
+          options: ["Phoenix", "Spirit", "Lunokhod 1"],
+          answer: "Phoenix",
+          fact: "The Phoenix mission identified water ice in Martian soil.",
+        },
+      ];
+
+      let quizIndex = 0;
+      let quizAnswered = false;
+
+      function renderQuiz() {
+        const question = quizQuestions[quizIndex];
+        quizAnswered = false;
+
+        document.getElementById("quizQuestion").textContent = question.question;
+        document.getElementById("quizFeedback").textContent = "";
+
+        const options = document.getElementById("quizOptions");
+        options.innerHTML = "";
+
+        question.options.forEach((option) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = option;
+
+          button.addEventListener("click", () => {
+            if (quizAnswered) return;
+            quizAnswered = true;
+
+            const correct = option === question.answer;
+            document.getElementById("quizFeedback").textContent = correct
+              ? `Correct! ${question.fact}`
+              : `Not quite. Correct answer: ${question.answer}. ${question.fact}`;
+          });
+
+          options.appendChild(button);
+        });
+      }
+
+      document.getElementById("nextQuiz").addEventListener("click", () => {
+        quizIndex = (quizIndex + 1) % quizQuestions.length;
+        renderQuiz();
+      });
+
+      updateSavedButton();
+      displayObjects();
+      renderQuiz();
+    </script>
+  </body>
+</html>
